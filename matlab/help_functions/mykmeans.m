@@ -9,7 +9,7 @@ closest_centroid_vec = zeros(length(data), 1);
 temp_dist_vec = zeros(length(data), ncentroids);
 
 %assume centroids is an int -- first pick randomly
-centroids = zeros(ncentroids, 2);
+centroids = zeros(ncentroids, size(data,2));
 for i = 1:ncentroids
    use_pt = ceil(rand(1)*length(data));
    centroids(i,:) = data(i,:);
