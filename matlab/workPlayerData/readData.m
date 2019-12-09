@@ -32,10 +32,18 @@ for j = 1:5
     k=k+1;
 end
 end
-    
+
+
+
 userTags = zeros(length(user_cat_names),height(playerdata))';
 for i = 1:length(user_cat_names);
     eval(['userTags(:,' num2str(i) ') = playerdata.' user_cat_names{i} ';']);
+end
+
+user_comb_stats = zeros(height(playerdata), length(base_names));
+for i = 1:length(base_names)
+   user_comb_stats(:,i) = mean(userTags(:,(i-1)*5+1:(i-1)*5+5), 2); 
+    
 end
 
 %now do tags -- this will get all the field names. now just need to combine
@@ -73,3 +81,22 @@ users = users';
 
 %now combine users matrices
 users_c = [users userTags]; %should be 500x109
+
+%now create some data correlating which people like which game
+%1,1 is player 1 liking game 1. 1,2 is player 1 liking game 2 -- columns
+%correspond to games
+likeMatrix = zeros(length(users_c), length(games));
+% like_th = .2;
+for i = 1:length(games)
+    est_like = sum(((games(i,:)-user_comb_stats).^2).*rand(length(users_c), 1), 2);
+    likeMatrix(:,i) = est_like;
+end
+
+%now randomly decimate this matrix
+mask = sprand(length(users_c), length(games), .1);
+mask = mask > 0;
+likeMatrix = likeMatrix.*mask;
+
+% sum(sum(likeMatrix > 0))/(500*500);
+
+
