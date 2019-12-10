@@ -1,6 +1,8 @@
 function [ S1 ] = similarity_matrix( A1 )
-%SIMILARITY_MATRIX Summary of this function goes here
-%   Detailed explanation goes here
+%SIMILARITY_MATRIX
+% outputs S1 which is the similarity matrix of the rows of A1. S1(i,j) =
+% similar_x(A(i,:), A(j,:)
+% outputs 1 if xi == xj
     S1 = zeros(size(A1,1));
 for i = 1:size(A1,1)
     %here we're working on user i

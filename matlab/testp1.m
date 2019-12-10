@@ -20,13 +20,14 @@ for i = 1:n_clusters
    plot(pts(idx, 1), pts(idx, 2), [use_color 'x']);
     
 end
+title(['K means clustering with ' num2str(n_clusters) ' clusters']);
 
 
 
+%% Mean shift cluster example
 
-%% MEan shift cluster example
-
-bandwidth = 1.5;
+%run with bandwidth 1 and bandwidth 1.5
+bandwidth = 1;
 
 fig = figure;
 X = pts;
@@ -47,3 +48,4 @@ for i = 1:length(x)
     end
 end
 contour(x,y,z')
+title(['bandwidth = ' num2str(bandwidth)]);

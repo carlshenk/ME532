@@ -1,6 +1,8 @@
 function [ closest_centroid_vec, centroids, c_new ] = mykmeans( data, ncentroids, max_iter )
-%MYKMEANS Summary of this function goes here
-%   Detailed explanation goes here
+%MYKMEANS -- implementation of kmeans algorithm.
+%output: nx1 vector of closest centroid to each point
+%        vector of centroids
+%        confidence value
 if(nargin < 3)
     max_iter = 100;
 end
@@ -22,8 +24,11 @@ for i = 1:max_iter
     c_new_acc = 0;
     for j = 1:length(data)
         for k = 1:ncentroids
+            %check distance from each point to each centroid and make a
+            %vector of all the distances
             temp_dist_vec(j,k) = euc_dist(data(j,:), centroids(k,:));
         end
+        %find the minimum distance and assign the point to that centroid
         [~, closest_centroid_vec(j)] = min(temp_dist_vec(j,:));
          
     end

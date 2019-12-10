@@ -93,7 +93,10 @@ for i = 1:length(games)
 end
 
 %now randomly decimate this matrix
-mask = sprand(length(users_c), length(games), .1);
+if(~exist('rating_density', 'var'))
+    rating_density = .1;
+end
+mask = sprand(length(users_c), length(games), rating_density);
 mask = mask > 0;
 likeMatrix = likeMatrix.*mask;
 

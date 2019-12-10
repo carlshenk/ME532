@@ -1,4 +1,7 @@
 function [Xc] = myMeanShift(X, niter, bw)
+%inputs: Data, number iterations, bandwidth
+%output: mean shifted data
+
 if(nargin < 2)
     niter = 100;
 end
@@ -7,7 +10,7 @@ Xc = X;
 for i = 1:niter
     Xc1 = Xc;
     for j = 1:length(X)
-        Xc(j, :) = shiftPts(Xc(j,:), X, 'flat', bw);
+        Xc(j, :) = shiftPts(Xc(j,:), X, 'g', bw);
     end 
     plot(X(:,1), X(:,2), '.', 'MarkerSize', 12);
     hold on;
